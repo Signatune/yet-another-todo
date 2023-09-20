@@ -7,11 +7,6 @@ const projects = document.createElement("div");
 projects.classList.add("projects");
 document.body.appendChild(projects);
 
-projectController.createProject("hi");
-projectController.createProject("second");
-
-projectController.addTodo("first", "lorem ipsum dolor sit amet", "hi");
-
 function updateView() {
   projects.innerHTML = Object.values(projectController.getState()).reduce(
     (acc, project) => {
@@ -21,4 +16,9 @@ function updateView() {
   );
 }
 
+projectController.createProject("hi");
+// projectController.createProject("second");
+
 updateView();
+
+export default updateView;

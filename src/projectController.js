@@ -1,5 +1,6 @@
 import todo from "./todo.js";
 import project from "./project.js";
+import updateView from "./index.js";
 
 let state = {};
 
@@ -20,6 +21,8 @@ function addTodo(name, description, projectName) {
       todo(name, description),
     ]),
   };
+
+  updateView();
 }
 
 function getState() {
