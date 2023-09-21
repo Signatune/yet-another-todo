@@ -1,8 +1,14 @@
 import todo from "./todo.js";
 import project from "./project.js";
-import updateView from "./index.js";
+import * as view from "./view.js";
 
 let state = {};
+
+function initialize() {
+  createProject("hi");
+  view.initialize();
+  view.update(state);
+}
 
 function createProject(name) {
   state = {
@@ -22,7 +28,7 @@ function addTodo(name, description, projectName) {
     ]),
   };
 
-  updateView();
+  view.update(state);
 }
 
 function getState() {
@@ -33,4 +39,4 @@ function logState() {
   console.log(state);
 }
 
-export { createProject, addTodo, logState, getState };
+export { initialize, createProject, addTodo, logState, getState };
