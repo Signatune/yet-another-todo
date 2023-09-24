@@ -1,42 +1,26 @@
-import todo from "./todo.js";
-import project from "./project.js";
 import * as view from "./view.js";
-
-let state = {};
+import * as model from "./projectModel.js";
 
 function initialize() {
-  createProject("hi");
+  model.createProject("Test Project");
   view.initialize();
-  view.update(state);
+  updateView();
 }
 
 function createProject(name) {
-  state = {
-    ...state,
-    [name]: project(name, []),
-  };
+  model.createProject(name);
+  updateView();
 }
 
 function addTodo(name, description, projectName) {
-  const existingTodos = state[projectName].todos;
+  model.addTodo(name, description, projectName);
+  updateView();
+}
 
-  state = {
-    ...state,
-    [projectName]: project(projectName, [
-      ...existingTodos,
-      todo(name, description),
-    ]),
-  };
+function updateView() {
+  let state = model.getState();
 
   view.update(state);
 }
 
-function getState() {
-  return { ...state };
-}
-
-function logState() {
-  console.log(state);
-}
-
-export { initialize, createProject, addTodo, logState, getState };
+export { initialize, createProject, addTodo };
