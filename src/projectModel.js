@@ -17,8 +17,19 @@ function addTodo(name, description, projectName) {
     ...state,
     [projectName]: Project(projectName, [
       ...existingTodos,
-      Todo(name, description),
+      Todo(name, description, projectName),
     ]),
+  };
+}
+
+function removeTodo(name, projectName) {
+  const remainingTodos = state[projectName].todos.filter(
+    (todo) => todo.name != name,
+  );
+
+  state = {
+    ...state,
+    [projectName]: Project(projectName, remainingTodos),
   };
 }
 
@@ -30,4 +41,4 @@ function logState() {
   console.log(state);
 }
 
-export { createProject, addTodo, logState, getState };
+export { createProject, addTodo, removeTodo, logState, getState };

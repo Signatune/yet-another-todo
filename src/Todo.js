@@ -1,13 +1,21 @@
-function Todo(name, description) {
+import * as projectController from "./projectController.js";
+
+function Todo(name, description, projectName) {
+  function remove() {
+    projectController.removeTodo(name, projectName);
+    console.log("remove");
+  }
+
   function render() {
     let todoEl = document.createElement("li");
-    let nameEl = document.createElement("h3");
-    let descriptionEl = document.createElement("p");
 
-    nameEl.textContent = name;
-    descriptionEl.textContent = description;
+    todoEl.innerHTML = `
+      <h3>${name}</h3>
+      <p>${description}</p>
+      <button class="remove">X</button>
+    `;
 
-    todoEl.replaceChildren(nameEl, descriptionEl);
+    todoEl.querySelector("button.remove").addEventListener("click", remove);
 
     return todoEl;
   }

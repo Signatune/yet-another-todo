@@ -18,15 +18,19 @@ function project(title, todos) {
 
     projectEl.innerHTML = `
       <h2>${title}</h2>
-      ${todos.reduce((acc, todo) => {
-        return acc.concat(todo.render().innerHTML);
-      }, ``)}
+      <div class="todos"></div>
       <label for="${title}-name">NAME</label>
       <input id="${title}-name" name="name" type="text"/>
       <label for="${title}-description">DESCRIPTION</label>
       <input id="${title}-description" name="description" type="text"/>
       <button id="${title}-add-todo">+</button>
     `;
+
+    projectEl.querySelector(".todos").replaceChildren(
+      ...todos.map((todo) => {
+        return todo.render();
+      }),
+    );
 
     projectEl
       .querySelector(`#${title}-add-todo`)

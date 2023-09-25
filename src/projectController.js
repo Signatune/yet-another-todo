@@ -17,10 +17,15 @@ function addTodo(name, description, projectName) {
   updateView();
 }
 
+function removeTodo(name, projectName) {
+  model.removeTodo(name, projectName);
+  updateView();
+}
+
 function updateView() {
   let state = model.getState();
 
   view.update(state);
 }
 
-export { initialize, createProject, addTodo };
+export { initialize, createProject, addTodo, removeTodo };
