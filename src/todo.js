@@ -1,9 +1,15 @@
-function todo(name, description) {
+function Todo(name, description) {
   function render() {
-    return `
-    <h3>${name}</h3>
-    <p>${description}</p>
-    `;
+    let todoEl = document.createElement("li");
+    let nameEl = document.createElement("h3");
+    let descriptionEl = document.createElement("p");
+
+    nameEl.textContent = name;
+    descriptionEl.textContent = description;
+
+    todoEl.replaceChildren(nameEl, descriptionEl);
+
+    return todo;
   }
 
   return {
@@ -13,4 +19,4 @@ function todo(name, description) {
   };
 }
 
-export default todo;
+export default Todo;

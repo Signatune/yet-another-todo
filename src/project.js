@@ -1,4 +1,4 @@
-import todo from "./todo.js";
+import todo from "./Todo.js";
 import * as projectController from "./projectController.js";
 
 function project(title, todos) {
@@ -19,7 +19,7 @@ function project(title, todos) {
     <div class="project">
       <h2>${title}</h2>
       ${todos.reduce((acc, todo) => {
-        return acc.concat(todo.render());
+        return acc.concat(todo.render().innerHTML);
       }, ``)}
       <label for="${title}-name">NAME</label>
       <input id="${title}-name" name="name" type="text"/>

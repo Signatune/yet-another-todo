@@ -1,5 +1,5 @@
-import todo from "./todo.js";
-import project from "./project.js";
+import todo from "./Todo.js";
+import project from "./Project.js";
 
 let state = {};
 
@@ -17,7 +17,7 @@ function addTodo(name, description, projectName) {
     ...state,
     [projectName]: project(projectName, [
       ...existingTodos,
-      todo(name, description),
+      Todo(name, description),
     ]),
   };
 }
