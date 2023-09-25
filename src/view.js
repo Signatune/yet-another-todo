@@ -10,9 +10,11 @@ function initialize() {
 }
 
 function update(state) {
-  projects.innerHTML = Object.values(state).reduce((acc, project) => {
-    return acc + project.render();
-  }, ``);
+  projects.replaceChildren();
+
+  Object.values(state).forEach((project) => {
+    projects.appendChild(project.render());
+  });
 }
 
 export { update, initialize };

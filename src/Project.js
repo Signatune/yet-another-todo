@@ -12,11 +12,11 @@ function project(title, todos) {
     todoDescription.value = "";
   }
 
-  window.newTodo = newTodo;
-
   function render() {
-    return `
-    <div class="project">
+    let projectEl = document.createElement("div");
+    projectEl.classList.add("project");
+
+    projectEl.innerHTML = `
       <h2>${title}</h2>
       ${todos.reduce((acc, todo) => {
         return acc.concat(todo.render().innerHTML);
@@ -25,9 +25,14 @@ function project(title, todos) {
       <input id="${title}-name" name="name" type="text"/>
       <label for="${title}-description">DESCRIPTION</label>
       <input id="${title}-description" name="description" type="text"/>
-      <button class="new-todo" onclick="newTodo()">+</button>
-    </div>
+      <button id="${title}-add-todo">+</button>
     `;
+
+    projectEl
+      .querySelector(`#${title}-add-todo`)
+      .addEventListener("click", newTodo);
+
+    return projectEl;
   }
 
   return {
