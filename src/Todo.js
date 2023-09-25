@@ -9,7 +9,7 @@ function Todo(name, description) {
 
     todoEl.replaceChildren(nameEl, descriptionEl);
 
-    return todo;
+    return todoEl;
   }
 
   return {

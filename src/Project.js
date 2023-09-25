@@ -1,4 +1,4 @@
-import todo from "./Todo.js";
+import Todo from "./Todo.js";
 import * as projectController from "./projectController.js";
 
 function project(title, todos) {

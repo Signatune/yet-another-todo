@@ -1,12 +1,12 @@
-import todo from "./Todo.js";
-import project from "./Project.js";
+import Todo from "./Todo.js";
+import Project from "./Project.js";
 
 let state = {};
 
 function createProject(name) {
   state = {
     ...state,
-    [name]: project(name, []),
+    [name]: Project(name, []),
   };
 }
 
@@ -15,7 +15,7 @@ function addTodo(name, description, projectName) {
 
   state = {
     ...state,
-    [projectName]: project(projectName, [
+    [projectName]: Project(projectName, [
       ...existingTodos,
       Todo(name, description),
     ]),
