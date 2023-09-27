@@ -22,10 +22,27 @@ function removeTodo(name, projectName) {
   updateView();
 }
 
+function increaseTodoPriority(name, projectName) {
+  model.increaseTodoPriority(name, projectName);
+  updateView();
+}
+
+function decreaseTodoPriority(name, projectName) {
+  model.decreaseTodoPriority(name, projectName);
+  updateView();
+}
+
 function updateView() {
   let state = model.getState();
 
   view.update(state);
 }
 
-export { initialize, createProject, addTodo, removeTodo };
+export {
+  initialize,
+  createProject,
+  addTodo,
+  removeTodo,
+  increaseTodoPriority,
+  decreaseTodoPriority,
+};

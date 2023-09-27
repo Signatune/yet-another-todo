@@ -33,6 +33,31 @@ function removeTodo(name, projectName) {
   };
 }
 
+function increaseTodoPriority(name, projectName) {
+  const todoIndex = findTodoIndex(name, projectName);
+
+  // This condition means both that the todo exists and that it is not
+  // the highest todo in the list
+  if (todoIndex > 0) {
+    let todo = state[projectName].todos[todoIndex];
+    let higherTodo = state[projectName].todos[todoIndex - 1];
+    state[projectName].todos[todoIndex] = higherTodo;
+    state[projectName].todos[todoIndex - 1] = todo;
+  }
+}
+
+function decreaseTodoPriority(name, projectName) {
+  const todoIndex = findTodoIndex(name, projectName);
+
+  if (todoIndex != -1 && todoIndex < state[projectName].todos.length) {
+    let todo = state[projectName].todos[todoIndex];
+
+    state[projectName].todos[todoIndex] =
+      state[projectName].todos[todoIndex + 1];
+    state[projectName].todos[todoIndex + 1] = todo;
+  }
+}
+
 function getState() {
   return state;
 }
@@ -41,4 +66,16 @@ function logState() {
   console.log(state);
 }
 
-export { createProject, addTodo, removeTodo, logState, getState };
+function findTodoIndex(name, projectName) {
+  return state[projectName].todos.findIndex((todo) => todo.name == name);
+}
+
+export {
+  createProject,
+  addTodo,
+  removeTodo,
+  increaseTodoPriority,
+  decreaseTodoPriority,
+  logState,
+  getState,
+};
