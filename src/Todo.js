@@ -1,7 +1,7 @@
 import * as projectController from "./projectController.js";
 import { format } from "date-fns";
 
-function Todo(name, description, dueDate, projectName) {
+function Todo(name, description, dueDate, expanded, projectName) {
   function remove() {
     projectController.removeTodo(name, projectName);
   }
@@ -12,7 +12,8 @@ function Todo(name, description, dueDate, projectName) {
 
     todoEl.innerHTML = `
       <h3>${name}</h3>
-      <p>${description}</p>
+      <button class="expand">${expanded ? "Collapse" : "Expand"}</button>
+      ${expanded ? `<p>${description}</p>` : ``}
       <p>Due date: ${formattedDueDate}</p>
       <button class="remove">X</button>
       <button class="increase">▲</button>
@@ -26,6 +27,9 @@ function Todo(name, description, dueDate, projectName) {
     todoEl.querySelector("button.decrease").addEventListener("click", () => {
       projectController.decreaseTodoPriority(name, projectName);
     });
+    todoEl.querySelector("button.expand").addEventListener("click", () => {
+      projectController.expandTodo(name, projectName);
+    });
 
     return todoEl;
   }
@@ -33,6 +37,7 @@ function Todo(name, description, dueDate, projectName) {
   return {
     name,
     description,
+    dueDate,
     render,
   };
 }

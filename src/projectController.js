@@ -12,8 +12,8 @@ function createProject(name) {
   updateView();
 }
 
-function addTodo(name, description, dueDate, projectName) {
-  model.addTodo(name, description, dueDate, projectName);
+function addTodo(name, description, dueDate, expanded, projectName) {
+  model.addTodo(name, description, dueDate, expanded, projectName);
   updateView();
 }
 
@@ -32,6 +32,11 @@ function decreaseTodoPriority(name, projectName) {
   updateView();
 }
 
+function expandTodo(name, projectName) {
+  model.expandTodo(name, projectName);
+  updateView();
+}
+
 function updateView() {
   let state = model.getState();
 
@@ -45,4 +50,5 @@ export {
   removeTodo,
   increaseTodoPriority,
   decreaseTodoPriority,
+  expandTodo,
 };

@@ -10,14 +10,14 @@ function createProject(name) {
   };
 }
 
-function addTodo(name, description, dueDate, projectName) {
+function addTodo(name, description, dueDate, expanded, projectName) {
   const existingTodos = state[projectName].todos;
 
   state = {
     ...state,
     [projectName]: Project(projectName, [
       ...existingTodos,
-      Todo(name, description, dueDate, projectName),
+      Todo(name, description, dueDate, expanded, projectName),
     ]),
   };
 }
@@ -58,6 +58,19 @@ function decreaseTodoPriority(name, projectName) {
   }
 }
 
+function expandTodo(name, projectName) {
+  const todoIndex = findTodoIndex(name, projectName);
+  const todo = state[projectName].todos[todoIndex];
+
+  state[projectName].todos[todoIndex] = Todo(
+    todo.name,
+    todo.description,
+    todo.dueDate,
+    true,
+    todo.projectName,
+  );
+}
+
 function getState() {
   return state;
 }
@@ -76,6 +89,7 @@ export {
   removeTodo,
   increaseTodoPriority,
   decreaseTodoPriority,
+  expandTodo,
   logState,
   getState,
 };

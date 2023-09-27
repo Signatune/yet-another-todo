@@ -11,6 +11,7 @@ function project(title, todos) {
       todoName.value,
       todoDescription.value,
       new Date(todoDueDate.value),
+      false,
       title,
     );
 
