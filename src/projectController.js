@@ -12,8 +12,8 @@ function createProject(name) {
   updateView();
 }
 
-function addTodo(name, description, projectName) {
-  model.addTodo(name, description, projectName);
+function addTodo(name, description, dueDate, projectName) {
+  model.addTodo(name, description, dueDate, projectName);
   updateView();
 }
 

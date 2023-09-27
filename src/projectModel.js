@@ -10,14 +10,14 @@ function createProject(name) {
   };
 }
 
-function addTodo(name, description, projectName) {
+function addTodo(name, description, dueDate, projectName) {
   const existingTodos = state[projectName].todos;
 
   state = {
     ...state,
     [projectName]: Project(projectName, [
       ...existingTodos,
-      Todo(name, description, projectName),
+      Todo(name, description, dueDate, projectName),
     ]),
   };
 }
