@@ -2,7 +2,7 @@ import * as view from "./view.js";
 import * as model from "./projectModel.js";
 
 function initialize() {
-  model.createProject("Test");
+  model.createProject("Reminders");
   view.initialize();
   updateView();
 }
