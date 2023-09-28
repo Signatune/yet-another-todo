@@ -32,8 +32,8 @@ function decreaseTodoPriority(name, projectName) {
   updateView();
 }
 
-function expandTodo(name, projectName) {
-  model.expandTodo(name, projectName);
+function toggleTodoExpand(name, projectName) {
+  model.toggleTodoExpand(name, projectName);
   updateView();
 }
 
@@ -50,5 +50,5 @@ export {
   removeTodo,
   increaseTodoPriority,
   decreaseTodoPriority,
-  expandTodo,
+  toggleTodoExpand,
 };

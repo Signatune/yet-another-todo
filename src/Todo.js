@@ -28,7 +28,7 @@ function Todo(name, description, dueDate, expanded, projectName) {
       projectController.decreaseTodoPriority(name, projectName);
     });
     todoEl.querySelector("button.expand").addEventListener("click", () => {
-      projectController.expandTodo(name, projectName);
+      projectController.toggleTodoExpand(name, projectName);
     });
 
     return todoEl;
@@ -38,6 +38,7 @@ function Todo(name, description, dueDate, expanded, projectName) {
     name,
     description,
     dueDate,
+    expanded,
     render,
   };
 }

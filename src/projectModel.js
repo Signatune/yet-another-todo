@@ -58,7 +58,7 @@ function decreaseTodoPriority(name, projectName) {
   }
 }
 
-function expandTodo(name, projectName) {
+function toggleTodoExpand(name, projectName) {
   const todoIndex = findTodoIndex(name, projectName);
   const todo = state[projectName].todos[todoIndex];
 
@@ -66,8 +66,8 @@ function expandTodo(name, projectName) {
     todo.name,
     todo.description,
     todo.dueDate,
-    true,
-    todo.projectName,
+    !todo.expanded,
+    projectName,
   );
 }
 
@@ -89,7 +89,7 @@ export {
   removeTodo,
   increaseTodoPriority,
   decreaseTodoPriority,
-  expandTodo,
+  toggleTodoExpand,
   logState,
   getState,
 };
