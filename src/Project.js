@@ -10,7 +10,7 @@ function project(title, todos) {
     projectController.addTodo(
       todoName.value,
       todoDescription.value,
-      new Date(todoDueDate.value),
+      todoDueDate.value,
       false,
       title,
     );

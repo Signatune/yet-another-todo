@@ -8,7 +8,7 @@ function Todo(name, description, dueDate, expanded, projectName) {
 
   function render() {
     let todoEl = document.createElement("li");
-    let formattedDueDate = format(dueDate, "MM/dd/yyyy");
+    let formattedDueDate = format(new Date(dueDate), "MM/dd/yyyy");
 
     todoEl.innerHTML = `
       <h3>${name}</h3>

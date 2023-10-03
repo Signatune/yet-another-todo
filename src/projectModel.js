@@ -1,20 +1,83 @@
 import Todo from "./Todo.js";
 import Project from "./Project.js";
 
-let state = {};
+let state = initializeState();
+
+function initializeState() {
+  if (localStorage == 0) {
+    return {};
+  } else {
+    let reloadedState = {};
+
+    const savedProjects = getLocalState();
+
+    for (const [projectName, content] of Object.entries(savedProjects)) {
+      reloadedState = createProjectOnState(reloadedState, projectName);
+
+      if (content.todos.length > 0) {
+        for (const todo of content.todos) {
+          reloadedState = addTodoOnState(
+            reloadedState,
+            todo.name,
+            todo.description,
+            todo.dueDate,
+            todo.expanded,
+            projectName,
+          );
+        }
+      }
+    }
+
+    return reloadedState;
+  }
+}
+
+function updateLocalState() {
+  localStorage.setItem("projects", JSON.stringify(state));
+}
+
+function getLocalState() {
+  return JSON.parse(localStorage.getItem("projects"));
+}
 
 function createProject(name) {
-  state = {
-    ...state,
+  state = createProjectOnState(state, name);
+
+  updateLocalState();
+}
+
+function createProjectOnState(existingState, name) {
+  return {
+    ...existingState,
     [name]: Project(name, []),
   };
 }
 
 function addTodo(name, description, dueDate, expanded, projectName) {
-  const existingTodos = state[projectName].todos;
+  state = addTodoOnState(
+    state,
+    name,
+    description,
+    dueDate,
+    expanded,
+    projectName,
+  );
 
-  state = {
-    ...state,
+  updateLocalState();
+}
+
+function addTodoOnState(
+  existingState,
+  name,
+  description,
+  dueDate,
+  expanded,
+  projectName,
+) {
+  const existingTodos = existingState[projectName].todos;
+
+  return {
+    ...existingState,
     [projectName]: Project(projectName, [
       ...existingTodos,
       Todo(name, description, dueDate, expanded, projectName),
@@ -31,6 +94,8 @@ function removeTodo(name, projectName) {
     ...state,
     [projectName]: Project(projectName, remainingTodos),
   };
+
+  updateLocalState();
 }
 
 function increaseTodoPriority(name, projectName) {
@@ -44,6 +109,8 @@ function increaseTodoPriority(name, projectName) {
     state[projectName].todos[todoIndex] = higherTodo;
     state[projectName].todos[todoIndex - 1] = todo;
   }
+
+  updateLocalState();
 }
 
 function decreaseTodoPriority(name, projectName) {
@@ -56,6 +123,8 @@ function decreaseTodoPriority(name, projectName) {
       state[projectName].todos[todoIndex + 1];
     state[projectName].todos[todoIndex + 1] = todo;
   }
+
+  updateLocalState();
 }
 
 function toggleTodoExpand(name, projectName) {
@@ -69,6 +138,8 @@ function toggleTodoExpand(name, projectName) {
     !todo.expanded,
     projectName,
   );
+
+  updateLocalState();
 }
 
 function getState() {
@@ -84,6 +155,7 @@ function findTodoIndex(name, projectName) {
 }
 
 export {
+  initializeState,
   createProject,
   addTodo,
   removeTodo,
